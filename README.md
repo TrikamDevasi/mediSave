@@ -1,5 +1,3 @@
-# mediSave
-
 # 💊 MediSave
 
 > **"Pay less. Stay healthy."**  
@@ -7,25 +5,28 @@
 
 
 
-## 🎯 Problem
-Same Atorvastatin 10mg: **₹8** (Jan Aushadhi) vs **₹98** (branded). No offline pharmacy price comparison app exists.
+## 🎯 Problem Statement
+The healthcare burden in India is massive, with millions of citizens spending a significant portion of their income on essential medicines. A drug like Atorvastatin 10mg costs **₹98** under major brands but is available for just **₹8** at Jan Aushadhi stores. However, there is a severe lack of awareness and **no dedicated offline pharmacy price comparison platform** to empower users with this knowledge.
+- **Vast Market:** 1.4 Billion Indians buy medicines, yet over 90% of these purchases still happen at offline, brick-and-mortar pharmacies.
+- **Information Asymmetry:** Patients are heavily reliant on specific prescribed brands, often unaware of high-quality, CDSCO-approved generic alternatives that cost 50-90% less.
+- **Fragmented Pricing:** Prices vary significantly between local pharmacies, national chains like Apollo/MedPlus, and online distributors. Finding the best local price is practically impossible without visiting multiple stores.
 
-**ITCH Score: 91/100** | **1.4B Indians** buy medicines | **90% offline purchases**
+## 🏥 Proposed Solution (What is MediSave?)
+**MediSave** is an offline-pharmacy-first Progressive Web App (PWA) designed to democratize access to affordable medicines by breaking down information barriers in the pharmaceutical market. By simply taking a picture of their prescription, users can unlock localized, cost-effective healthcare choices.
 
-## 🏥 What is MediSave?
-**Offline-pharmacy-first PWA** (unlike 1mg/Truemeds):
-1. Scan prescription → AI extracts medicines
-2. Compare nearby pharmacies + online prices
-3. Find 50-92% cheaper generics + Jan Aushadhi stores
-4. Track savings + price alerts
+### How it solves the problem:
+1. **AI-Powered Digitization:** AI accurately extracts medicine names and dosages directly from complex prescriptions, eliminating the need to manually decipher handwriting.
+2. **Generic Alternatives Matcher:** It instantly identifies CDSCO-approved generic equivalents and maps them to government-subsidized Jan Aushadhi stores, unlocking massive savings (up to 92%).
+3. **Hyperlocal Price Intelligence:** Unlike online-only pharmacies (e.g., 1mg, Truemeds), MediSave compares prices across nearby offline pharmacies (within a 1km radius), ensuring patients get immediate relief at the best price locally.
+4. **Actionable Insights:** It plots the cheapest nearby pharmacies and tracks cumulative user savings over time.
 
 ## ✨ Key Features
-- 📷 **OCR Scanner** (Gemini → GPT-4o fallback)
-- 💰 **Multi-pharmacy comparison** (Apollo, MedPlus, 1km radius)
-- 🧬 **Generic matcher** (CDSCO-approved)
-- 🗺️ **10K+ Jan Aushadhi locator**
-- 💬 **Safety chatbot** (LangChain RAG)
-- 📊 **Savings dashboard** + alerts
+- 📷 **Smart OCR Scanner:** Powered by Gemini (with GPT-4o fallback) to digitize prescriptions effortlessly.
+- 💰 **Multi-Pharmacy Comparison:** Real-time localized comparison between major chains and local neighborhood stores.
+- 🧬 **Verified Generic Matcher:** CDSCO-approved generic database integration to ensure clinical equivalency and safety.
+- 🗺️ **Jan Aushadhi Locator:** Locates and maps out to the 10K+ government-subsidized medical stores around you.
+- 💬 **Safety & Interactions Chatbot:** LangChain RAG-based assistant providing instant safety information, side effects, and interactions.
+- 📊 **Savings Dashboard:** Track your historical savings and set proactive price drop alerts.
 
 ## 🛠 Tech Stack
 ```
