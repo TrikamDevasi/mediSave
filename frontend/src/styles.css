@@ -1,0 +1,313 @@
+/*
+  Art direction: MediSave (India medicine price comparison) → Clinical trust meets warm accessibility
+  Palette: Warm sand neutrals (not white/black) + deep teal accent (OKLCH) — evokes clarity, not cold pharma
+  Typography: Zodiak (display, editorial serif) + Satoshi (body, geometric humanist) — authority + approachability
+  Density: Balanced — generous hero, tighter information sections
+*/
+
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Fontshare Fonts ────────────────────────────────────── */
+/* Loaded in __root.tsx via Fontshare CDN */
+/* Zodiak = editorial display  |  Satoshi = body + UI */
+
+/* ─── Tailwind Theme ─────────────────────────────────────── */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 16px);
+
+  --color-background:     var(--background);
+  --color-foreground:     var(--foreground);
+  --color-card:           var(--card);
+  --color-card-foreground:var(--card-foreground);
+  --color-popover:        var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary:        var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-dark:   var(--primary-dark);
+  --color-primary-light:  var(--primary-light);
+  --color-secondary:      var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted:          var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent:         var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive:    var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success:        var(--success);
+  --color-warning:        var(--warning);
+  --color-border:         var(--border);
+  --color-input:          var(--input);
+  --color-ring:           var(--ring);
+  --color-surface:        var(--surface);
+  --color-mutedfg:        var(--mutedfg);
+  --color-chart-1:        var(--chart-1);
+  --color-chart-2:        var(--chart-2);
+  --color-chart-3:        var(--chart-3);
+  --color-chart-4:        var(--chart-4);
+  --color-chart-5:        var(--chart-5);
+  --color-sidebar:        var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring:   var(--sidebar-ring);
+
+  --font-sans:    "Satoshi", "General Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Zodiak", "Boska", Georgia, serif;
+}
+
+/* ─── Light Theme (warm neutrals, not #ffffff) ─────────────── */
+:root {
+  --radius: 0.75rem;
+
+  /* Warm sand base — not pure white */
+  --background:   oklch(0.971 0.009 85);    /* #F8F6F1 warm sand */
+  --foreground:   oklch(0.225 0.015 65);    /* #231E15 warm near-black */
+  --surface:      oklch(0.988 0.005 85);    /* #FDFBF8 warm off-white for cards */
+  --mutedfg:      oklch(0.545 0.012 75);    /* #7B7468 warm grey */
+
+  --card:         oklch(0.988 0.005 85);
+  --card-foreground: oklch(0.225 0.015 65);
+  --popover:      oklch(0.988 0.005 85);
+  --popover-foreground: oklch(0.225 0.015 65);
+
+  /* Deep teal — the ONE accent */
+  --primary:      oklch(0.505 0.075 192);   /* #005F65 rich teal */
+  --primary-foreground: oklch(0.99 0.002 85);
+  --primary-dark: oklch(0.395 0.065 196);   /* #004349 */
+  --primary-light: oklch(0.900 0.020 175);  /* #D6E8E6 tint for surfaces */
+
+  --secondary:    oklch(0.955 0.010 85);
+  --secondary-foreground: oklch(0.225 0.015 65);
+  --muted:        oklch(0.955 0.010 85);
+  --muted-foreground: oklch(0.545 0.012 75);
+  --accent:       oklch(0.935 0.025 175);
+  --accent-foreground: oklch(0.395 0.065 196);
+
+  --success:      oklch(0.530 0.130 142);   /* #347A1A */
+  --warning:      oklch(0.620 0.160 58);    /* #C96E00 */
+  --destructive:  oklch(0.560 0.240 28);
+  --destructive-foreground: oklch(0.99 0.002 85);
+
+  /* Alpha-blended borders — spec from design brief */
+  --border:       oklch(0.225 0.015 65 / 0.11);
+  --input:        oklch(0.225 0.015 65 / 0.14);
+  --ring:         oklch(0.505 0.075 192);
+
+  --chart-1:      oklch(0.505 0.075 192);
+  --chart-2:      oklch(0.530 0.130 142);
+  --chart-3:      oklch(0.620 0.160 58);
+  --chart-4:      oklch(0.395 0.065 196);
+  --chart-5:      oklch(0.900 0.020 175);
+
+  --sidebar:         oklch(0.988 0.005 85);
+  --sidebar-foreground: oklch(0.225 0.015 65);
+  --sidebar-primary: oklch(0.505 0.075 192);
+  --sidebar-primary-foreground: oklch(0.99 0.002 85);
+  --sidebar-accent:  oklch(0.955 0.010 85);
+  --sidebar-accent-foreground: oklch(0.225 0.015 65);
+  --sidebar-border:  oklch(0.225 0.015 65 / 0.11);
+  --sidebar-ring:    oklch(0.505 0.075 192);
+}
+
+/* ─── Dark Theme ────────────────────────────────────────────── */
+.dark {
+  --background:   oklch(0.170 0.014 200);   /* #111C1E dark teal-tinted */
+  --foreground:   oklch(0.960 0.006 85);    /* #F5F3EF warm off-white */
+  --surface:      oklch(0.220 0.018 200);   /* #162023 */
+  --mutedfg:      oklch(0.680 0.012 85);    /* #A8A299 */
+
+  --card:         oklch(0.220 0.018 200);
+  --card-foreground: oklch(0.960 0.006 85);
+  --popover:      oklch(0.220 0.018 200);
+  --popover-foreground: oklch(0.960 0.006 85);
+
+  --primary:      oklch(0.710 0.080 188);   /* brighter teal on dark */
+  --primary-foreground: oklch(0.170 0.014 200);
+  --primary-dark: oklch(0.820 0.070 188);
+  --primary-light: oklch(0.270 0.038 192);
+
+  --secondary:    oklch(0.270 0.020 200);
+  --secondary-foreground: oklch(0.960 0.006 85);
+  --muted:        oklch(0.270 0.020 200);
+  --muted-foreground: oklch(0.680 0.012 85);
+  --accent:       oklch(0.270 0.020 200);
+  --accent-foreground: oklch(0.960 0.006 85);
+  --destructive:  oklch(0.700 0.190 22);
+  --destructive-foreground: oklch(0.960 0.006 85);
+
+  --border:       oklch(0.960 0.006 85 / 0.09);
+  --input:        oklch(0.960 0.006 85 / 0.13);
+  --ring:         oklch(0.710 0.080 188);
+
+  --sidebar:         oklch(0.220 0.018 200);
+  --sidebar-foreground: oklch(0.960 0.006 85);
+  --sidebar-primary: oklch(0.710 0.080 188);
+  --sidebar-primary-foreground: oklch(0.170 0.014 200);
+  --sidebar-accent:  oklch(0.270 0.020 200);
+  --sidebar-accent-foreground: oklch(0.960 0.006 85);
+  --sidebar-border:  oklch(0.960 0.006 85 / 0.09);
+  --sidebar-ring:    oklch(0.710 0.080 188);
+}
+
+/* ─── Base Styles ────────────────────────────────────────── */
+@layer base {
+  * {
+    border-color: var(--color-border);
+    box-sizing: border-box;
+  }
+
+  html {
+    /* CSS View Transitions */
+    @media (prefers-reduced-motion: no-preference) {
+      view-transition-name: root;
+    }
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "ss01", "ss02", "cv01";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Display font applied to headings */
+  h1, h2, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  /* Fluid type scale — clamp(min, preferred, max) */
+  :root {
+    --text-xs:   clamp(0.6875rem, 0.65rem + 0.2vw,  0.75rem);
+    --text-sm:   clamp(0.8125rem, 0.78rem + 0.18vw, 0.875rem);
+    --text-base: clamp(0.9375rem, 0.90rem + 0.2vw,  1rem);
+    --text-lg:   clamp(1.0625rem, 1rem + 0.35vw,    1.125rem);
+    --text-xl:   clamp(1.125rem,  1.05rem + 0.5vw,  1.25rem);
+    --text-2xl:  clamp(1.25rem,   1.1rem + 0.9vw,   1.5rem);
+    --text-3xl:  clamp(1.5rem,    1.2rem + 1.5vw,   2rem);
+    --text-4xl:  clamp(1.875rem,  1.4rem + 2.5vw,   2.75rem);
+    --text-5xl:  clamp(2.25rem,   1.6rem + 3.5vw,   3.5rem);
+  }
+
+  /* Scroll-driven fade-in — zero JS needed */
+  @supports (animation-timeline: view()) {
+    .fade-in {
+      animation: reveal-fade linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+
+    @keyframes reveal-fade {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    .fade-in-left {
+      animation: reveal-left linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+
+    @keyframes reveal-left {
+      from { opacity: 0; transform: translateX(-16px); }
+      to   { opacity: 1; transform: translateX(0);     }
+    }
+  }
+
+  /* Fallback for browsers without animation-timeline */
+  @supports not (animation-timeline: view()) {
+    .fade-in, .fade-in-left { opacity: 1; transform: none; }
+  }
+
+  /* Scrollbar utilities */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+
+  /* Scroll hint fade */
+  .scroll-hint {
+    mask-image: linear-gradient(to right, black 88%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
+  }
+
+  /* Tabular numbers for stats */
+  .tabular-nums { font-variant-numeric: tabular-nums; }
+
+  /* Spring-based card hover — spec from design brief */
+  .card-spring {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .card-spring:hover { transform: translateY(-2px); }
+
+  /* Layered elevation shadows */
+  .shadow-elevated {
+    box-shadow:
+      0 1px 2px oklch(0 0 0 / 0.04),
+      0 4px 12px oklch(0 0 0 / 0.07);
+  }
+  .shadow-lifted {
+    box-shadow:
+      0 2px 4px oklch(0 0 0 / 0.05),
+      0 8px 24px oklch(0 0 0 / 0.10);
+  }
+
+  /* Prose max-width */
+  .prose-max { max-width: 65ch; }
+
+  /* Active tap state */
+  .tap-active:active { transform: scale(0.97); transition: transform 0.1s ease; }
+}
+
+/* ─── Shimmer Loading Skeleton ───────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.940 0.005 85) 0px,
+    oklch(0.970 0.003 85) 200px,
+    oklch(0.940 0.005 85) 400px
+  );
+  background-size: 1200px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.dark .shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.240 0.012 200) 0px,
+    oklch(0.280 0.015 200) 200px,
+    oklch(0.240 0.012 200) 400px
+  );
+  background-size: 1200px 100%;
+}
+
+/* ─── CSS View Transitions ───────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: 220ms ease both fade-out;
+  }
+  ::view-transition-new(root) {
+    animation: 280ms ease both fade-in-vt;
+  }
+  @keyframes fade-out    { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes fade-in-vt  { from { opacity: 0; } to { opacity: 1; } }
+}
