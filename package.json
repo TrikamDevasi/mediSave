@@ -1,0 +1,16 @@
+{
+  "name": "medisave",
+  "private": true,
+  "scripts": {
+    "install:all": "cd frontend && npm install && cd ../backend && npm install && cd ../ml-service && npm install",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:ml": "cd ml-service && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:ml\" \"npm run dev:frontend\"",
+    "seed": "cd backend && node scripts/seed.js",
+    "health": "curl http://localhost:5000/health && curl http://localhost:3000/ml/health"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
