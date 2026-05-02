@@ -18,9 +18,9 @@ import {
   User
 } from "lucide-react";
 import AppLayout from "@/components/layout/AppLayout";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { ScrambleNumber } from "@/components/common/ScrambleNumber";
 import { MorphBlob } from "@/components/common/MorphBlob";
 import { usePageTransition } from "./__root";

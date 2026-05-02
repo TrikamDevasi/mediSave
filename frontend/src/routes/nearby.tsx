@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AppLayout from '@/components/layout/AppLayout';
-import { Card } from '@/components/ui/Card';
+import { Card } from '@/components/ui/card';
 import { api } from '@/lib/axios';
 
 // ⚠️ Leaflet is browser-only — loaded lazily so SSR never imports it

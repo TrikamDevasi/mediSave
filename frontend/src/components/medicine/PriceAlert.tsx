@@ -1,10 +1,10 @@
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bell, BellRing, X, TrendingDown, ShieldCheck, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
-import { Input } from "@/components/ui/Input";
-import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 
 interface PriceAlertProps {
   medicineName: string;

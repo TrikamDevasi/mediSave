@@ -16,8 +16,8 @@ import {
   ArrowUpLeft,
 } from "lucide-react";
 import AppLayout from "@/components/layout/AppLayout";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import MediCard from "@/components/medicine/MediCard";
 import { searchResultsMock } from "@/data/mockMedicines";
 import { usePageTransition } from "./__root";

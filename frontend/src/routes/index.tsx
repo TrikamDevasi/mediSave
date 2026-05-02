@@ -22,8 +22,8 @@ import { ParticleField } from "@/components/common/ParticleField";
 import { CityFlip } from "@/components/common/CityFlip";
 import { AnimatedHeadline } from "@/components/common/AnimatedHeadline";
 import { usePageTransition } from "./__root";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 const tickerItems = [
   { icon: "💊", text: "₹2.4 Cr saved today" },
