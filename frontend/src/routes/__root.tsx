@@ -154,14 +154,3 @@ function RootComponent() {
     </PageTransitionProvider>
   );
 }
-      
-      {/* Global Overlays */}
-      <AnimatePresence>
-        {isBotOpen && <MediBot />}
-      </AnimatePresence>
-      
-      <AmbientSound />
-      <Toaster position="top-center" />
-    </React.Fragment>
-  );
-}
