@@ -38,7 +38,7 @@ function getPriceColor(price: number): string {
 }
 
 // ─── Component ───────────────────────────────────────────────────────────────
-export default function MediCard({
+function MediCard({
   result,
   cheapest = false,
   medicineName,
