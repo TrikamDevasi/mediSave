@@ -282,8 +282,9 @@ User → Vercel (Frontend SPA)
 | **Framework Preset** | Vite (or Other) |
 | **Root Directory** | `frontend` |
 | **Build Command** | `npm run build` |
-| **Output Directory** | (Leave empty — auto-detected) |
+| **Output Directory** | `.vercel/output` |
 | **Install Command** | `npm install` |
+
 
 **Environment Variables to set in Vercel Dashboard:**
 | Variable | Value |
