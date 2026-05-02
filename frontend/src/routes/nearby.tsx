@@ -404,6 +404,5 @@ function NearbyPage() {
 
         </div>
       </div>
-    </div>
   );
 }

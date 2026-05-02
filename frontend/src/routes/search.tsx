@@ -452,6 +452,5 @@ function SearchPage() {
 
         </div>
       </div>
-    </div>
   );
 }

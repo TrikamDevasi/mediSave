@@ -180,6 +180,5 @@ function ScanPage() {
         </AnimatePresence>
 
       </div>
-    </div>
   );
 }
