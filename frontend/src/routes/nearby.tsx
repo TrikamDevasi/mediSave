@@ -378,7 +378,12 @@ function NearbyPage() {
           </motion.aside>
 
           {/* RIGHT PANEL - MAP */}
-          <main className="nearby-map-container h-full">
+          <main 
+            className="nearby-map-container h-full"
+            style={{ 
+              display: window.innerWidth < 1024 && view === 'list' ? 'none' : 'block'
+            }}
+          >
              <div className="absolute inset-0 bg-[#0f0e0c]" />
 
              {userLocation && (
