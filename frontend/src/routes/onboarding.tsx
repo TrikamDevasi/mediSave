@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -19,6 +19,15 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export const Route = createFileRoute("/onboarding")({
+  beforeLoad: () => {
+    // If already onboarded, redirect to home
+    const onboarded = typeof window !== 'undefined' && localStorage.getItem('medisave_onboarded') === 'true';
+    if (onboarded) {
+      throw redirect({
+        to: '/',
+      });
+    }
+  },
   head: () => ({
     meta: [
       { title: "Welcome to MediSave" },

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { 
@@ -26,6 +26,18 @@ import { MorphBlob } from "@/components/common/MorphBlob";
 import { usePageTransition } from "./__root";
 
 export const Route = createFileRoute("/dashboard")({
+  beforeLoad: ({ location }) => {
+    // If not authenticated, redirect to login
+    const token = typeof window !== 'undefined' && localStorage.getItem('medisave_auth_token');
+    if (!token) {
+      throw redirect({
+        to: '/login',
+        search: {
+          redirect: location.href,
+        },
+      });
+    }
+  },
   component: DashboardPage,
 });
 

@@ -1,7 +1,7 @@
 /**
  * Login page — demo credentials pre-filled for hackathon.
  */
-import { createFileRoute, useNavigate, Link } from '@tanstack/react-router';
+import { createFileRoute, useNavigate, Link, redirect } from '@tanstack/react-router';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Loader2, Pill } from 'lucide-react';
@@ -9,6 +9,15 @@ import { useAuth } from '@/hooks/useAuth';
 import { notify } from '@/utils/notify';
 
 export const Route = createFileRoute('/login')({
+  beforeLoad: () => {
+    // If already authenticated, redirect to dashboard
+    const token = typeof window !== 'undefined' && localStorage.getItem('medisave_auth_token');
+    if (token) {
+      throw redirect({
+        to: '/dashboard',
+      });
+    }
+  },
   head: () => ({
     meta: [
       { title: 'Login — MediSave' },

@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
 import { 
@@ -67,6 +67,15 @@ const trendingTopics = [
 ]
 
 export const Route = createFileRoute("/")({
+  beforeLoad: ({ location }) => {
+    // If not onboarded, redirect to onboarding
+    const onboarded = typeof window !== 'undefined' && localStorage.getItem('medisave_onboarded') === 'true';
+    if (!onboarded) {
+      throw redirect({
+        to: '/onboarding',
+      });
+    }
+  },
   component: HomePage,
 });
 
