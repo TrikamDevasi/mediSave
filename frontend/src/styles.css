@@ -319,8 +319,10 @@ section {
     aurora-spin-1 20s linear infinite,
     aurora-spin-2 25s linear infinite,
     aurora-spin-3 30s linear infinite;
-  filter: blur(100px);
-  opacity: 0.8;
+  filter: blur(80px); /* Reduced from 100px for performance */
+  opacity: 0.6;       /* Reduced from 0.8 for subtle blend */
+  will-change: transform;
+  transform: translateZ(0); /* Force GPU acceleration */
 }
 
 /* ─── Trust Section ─── */
@@ -445,12 +447,14 @@ section {
   animation: marquee 40s linear infinite;
   display: flex;
   width: max-content;
+  will-change: transform;
 }
 
 .animate-marquee-reverse {
   animation: marquee-reverse 40s linear infinite;
   display: flex;
   width: max-content;
+  will-change: transform;
 }
 
 /* ─── Helpers ─── */

@@ -24,15 +24,15 @@ export function ParticleField() {
     resize()
     window.addEventListener("resize", resize)
 
-    const colors = ["#0d9ea6", "#fbbf24", "#4ade80", "#a78bfa"]
-    const count = 80 
+    const isMobile = window.innerWidth < 768
+    const count = isMobile ? 30 : 60 
 
     /* Generate capsule shape target positions */
     const getCapsulePoints = (n: number) => {
       const points: {x: number, y: number}[] = []
       const cx = canvas.width / 2
       const cy = canvas.height / 2
-      const rx = 160, ry = 60
+      const rx = isMobile ? 100 : 160, ry = isMobile ? 40 : 60
       
       for (let i = 0; i < n; i++) {
         const t = (i / n) * Math.PI * 2
@@ -52,8 +52,8 @@ export function ParticleField() {
       vy: (Math.random()-0.5) * 2,
       targetX: targets[i % targets.length].x,
       targetY: targets[i % targets.length].y,
-      size: Math.random() * 2 + 1,
-      opacity: Math.random() * 0.5 + 0.1,
+      size: Math.random() * 1.5 + 1,
+      opacity: Math.random() * 0.4 + 0.1,
       color: colors[Math.floor(Math.random() * colors.length)]
     }))
 
@@ -64,28 +64,27 @@ export function ParticleField() {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       tick++
 
-      if (tick % 180 === 0) {
+      if (tick % 240 === 0) {
         mode = mode === "form" ? "drift" : "form"
         if (mode === "form") targets = getCapsulePoints(count)
       }
 
       particles.forEach((p, i) => {
         if (mode === "form") {
-          p.vx += (p.targetX - p.x) * 0.015
-          p.vy += (p.targetY - p.y) * 0.015
-          p.vx *= 0.91
-          p.vy *= 0.91
+          p.vx += (p.targetX - p.x) * 0.01
+          p.vy += (p.targetY - p.y) * 0.01
+          p.vx *= 0.92
+          p.vy *= 0.92
         } else {
-          p.vx += (Math.random()-0.5) * 0.15
-          p.vy += (Math.random()-0.5) * 0.15
-          p.vx *= 0.97
-          p.vy *= 0.97
+          p.vx += (Math.random()-0.5) * 0.1
+          p.vy += (Math.random()-0.5) * 0.1
+          p.vx *= 0.98
+          p.vy *= 0.98
         }
         
         p.x += p.vx
         p.y += p.vy
 
-        // Wrap around for drift mode
         if (p.x < 0) p.x = canvas.width
         if (p.x > canvas.width) p.x = 0
         if (p.y < 0) p.y = canvas.height
@@ -96,18 +95,20 @@ export function ParticleField() {
         ctx.fillStyle = p.color + Math.floor(p.opacity * 255).toString(16).padStart(2,"0")
         ctx.fill()
 
-        // Connection lines
-        particles.slice(i+1).forEach(p2 => {
-          const dist = Math.hypot(p.x-p2.x, p.y-p2.y)
-          if (dist < 80) {
-            ctx.beginPath()
-            ctx.moveTo(p.x, p.y)
-            ctx.lineTo(p2.x, p2.y)
-            ctx.strokeStyle = `rgba(13,158,166,${0.12 * (1 - dist/80)})`
-            ctx.lineWidth = 0.5
-            ctx.stroke()
-          }
-        })
+        // Connection lines - Only on Desktop for performance
+        if (!isMobile) {
+          particles.slice(i+1).forEach(p2 => {
+            const dist = Math.hypot(p.x-p2.x, p.y-p2.y)
+            if (dist < 70) {
+              ctx.beginPath()
+              ctx.moveTo(p.x, p.y)
+              ctx.lineTo(p2.x, p2.y)
+              ctx.strokeStyle = `rgba(13,158,166,${0.1 * (1 - dist/70)})`
+              ctx.lineWidth = 0.4
+              ctx.stroke()
+            }
+          })
+        }
       })
 
       requestAnimationFrame(animate)
