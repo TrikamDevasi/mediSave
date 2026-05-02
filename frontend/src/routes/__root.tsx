@@ -167,11 +167,12 @@ import { useSearch } from "@tanstack/react-router";
 function RootComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const search = useSearch({ strict: false }) as any;
+  const isHideNavbar = pathname === '/onboarding';
   const isBotOpen = search?.bot === 'true' || search?.bot === true;
 
   return (
     <React.Fragment>
-      <Header />
+      {!isHideNavbar && <Header />}
       <AnimatePresence mode="wait">
         <motion.div
           key={pathname}
@@ -183,7 +184,7 @@ function RootComponent() {
           <Outlet />
         </motion.div>
       </AnimatePresence>
-      <BottomNav />
+      {!isHideNavbar && <BottomNav />}
       
       {/* Global Overlays */}
       <AnimatePresence>
