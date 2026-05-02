@@ -1,22 +1,57 @@
 import * as React from "react";
-
 import { cn } from "@/lib/utils";
 
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
-  ({ className, type, ...props }, ref) => {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+  error?: string;
+  loading?: boolean;
+}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, label, error, loading, ...props }, ref) => {
+    const id = React.useId();
+
     return (
-      <input
-        type={type}
-        className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-          className,
+      <div className="w-full space-y-1.5">
+        <div className="input-wrapper group">
+          <input
+            id={id}
+            ref={ref}
+            className={cn(
+              "input-field peer",
+              error && "border-[var(--color-danger)] focus:border-[var(--color-danger)] focus:ring-[var(--color-danger-light)]",
+              className
+            )}
+            placeholder=" "
+            {...props}
+          />
+          <label
+            htmlFor={id}
+            className={cn(
+              "input-label",
+              error && "text-[var(--color-danger)] peer-focus:text-[var(--color-danger)]"
+            )}
+          >
+            {label}
+          </label>
+          
+          {loading && (
+            <div className="absolute right-4 top-1/2 -translate-y-1/2">
+              <div className="btn-spinner text-[var(--color-primary)]" />
+            </div>
+          )}
+        </div>
+        
+        {error && (
+          <p className="text-[10px] font-bold text-[var(--color-danger)] uppercase tracking-widest pl-4">
+            {error}
+          </p>
         )}
-        ref={ref}
-        {...props}
-      />
+      </div>
     );
-  },
+  }
 );
+
 Input.displayName = "Input";
 
 export { Input };

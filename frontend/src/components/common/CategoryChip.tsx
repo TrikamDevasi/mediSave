@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { useNavigate } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 
 export default function CategoryChip({
   label,
@@ -12,18 +13,20 @@ export default function CategoryChip({
 }) {
   const navigate = useNavigate();
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.05, y: -2 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 500, damping: 20 }}
       onClick={() => navigate({ to: "/search", search: { q: q ?? label } })}
       className="
-        tap-active shrink-0 inline-flex items-center gap-1.5 rounded-lg border border-border
-        bg-card px-3.5 py-2 font-sans text-sm font-medium text-foreground
-        shadow-sm transition-all duration-200
-        hover:border-primary/40 hover:bg-primary/5 hover:text-primary
-        active:scale-95
+        tap-active shrink-0 inline-flex items-center gap-2 rounded-xl border border-border
+        bg-surface px-5 py-3 font-sans text-sm font-bold text-foreground
+        shadow-sm transition-all
+        hover:border-primary/30 hover:bg-primary-light hover:text-primary
       "
     >
-      <span className="text-base leading-none" aria-hidden="true">{emoji}</span>
-      <span>{label}</span>
-    </button>
+      <span className="text-lg leading-none" aria-hidden="true">{emoji}</span>
+      <span className="tracking-tight">{label}</span>
+    </motion.button>
   );
 }

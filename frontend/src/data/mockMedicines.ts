@@ -21,6 +21,7 @@ export type SearchResult = {
   price: number;
   mrp: number;
   inStock: boolean;
+  medicineName?: string;
 };
 
 export const recentlySearched: Medicine[] = [
@@ -52,12 +53,15 @@ export const recentlySearched: Medicine[] = [
 ];
 
 export const searchResultsMock: SearchResult[] = [
-  { id: "r1", pharmacy: "Apollo Pharmacy", distanceKm: 0.4, price: 89, mrp: 98, inStock: true },
-  { id: "r2", pharmacy: "MedPlus", distanceKm: 0.7, price: 36, mrp: 98, inStock: true },
-  { id: "r3", pharmacy: "Netmeds", online: true, price: 76, mrp: 98, inStock: true },
-  { id: "r4", pharmacy: "Jan Aushadhi", distanceKm: 1.2, price: 8, mrp: 98, inStock: true, janAushadhi: true },
-  { id: "r5", pharmacy: "PharmEasy", online: true, price: 79, mrp: 98, inStock: false },
+  { id: "r1", pharmacy: "Apollo Pharmacy", medicineName: "Atorvastatin 10mg", distanceKm: 0.4, price: 89, mrp: 98, inStock: true },
+  { id: "r2", pharmacy: "MedPlus", medicineName: "Atorvastatin 10mg", distanceKm: 0.7, price: 36, mrp: 98, inStock: true },
+  { id: "r3", pharmacy: "Netmeds", medicineName: "Atorvastatin 10mg", online: true, price: 76, mrp: 98, inStock: true },
+  { id: "r4", pharmacy: "Jan Aushadhi", medicineName: "Atorvastatin 10mg", distanceKm: 1.2, price: 8, mrp: 98, inStock: true, janAushadhi: true },
+  { id: "r5", pharmacy: "PharmEasy", medicineName: "Atorvastatin 10mg", online: true, price: 79, mrp: 98, inStock: false },
+  { id: "r6", pharmacy: "MedPlus", medicineName: "Metformin 500mg", distanceKm: 0.7, price: 18, mrp: 63, inStock: true },
+  { id: "r7", pharmacy: "Apollo Pharmacy", medicineName: "Metformin 500mg", distanceKm: 0.4, price: 54, mrp: 63, inStock: true },
 ];
+
 
 export const priceTrend7d = [
   { day: "Mon", price: 89 },

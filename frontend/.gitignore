@@ -16,6 +16,16 @@ dist-ssr
 .nitro
 *.local
 
+# Lock files — use bun.lockb, not package-lock
+package-lock.json
+yarn.lock
+
+# Env secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars
@@ -30,3 +40,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+

@@ -1,7 +1,7 @@
 export default function JanAushadhiBadge() {
   return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-warning px-2 py-0.5 text-xs font-semibold text-white">
-      🏛 Jan Aushadhi
+    <span className="rounded-full bg-govt-light px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-govt border border-govt/20">
+      Jan Aushadhi
     </span>
   );
 }

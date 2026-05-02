@@ -1,48 +1,59 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Home, Search, Camera, MapPin, TrendingDown } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { Home, Search, Bot, MapPin, Bookmark } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const tabs: { to: string; label: string; icon: LucideIcon }[] = [
-  { to: "/",         label: "Home",    icon: Home },
-  { to: "/search",   label: "Search",  icon: Search },
-  { to: "/scan",     label: "Scan",    icon: Camera },
-  { to: "/nearby",   label: "Nearby",  icon: MapPin },
-  { to: "/dashboard",label: "Savings", icon: TrendingDown },
+const navItems = [
+  { icon: <Search size={17} strokeWidth={2} />, label: "Search",  to: "/search"   },
+  { icon: <MapPin size={17} strokeWidth={2} />, label: "Nearby",  to: "/nearby"   },
+  { icon: <Bot size={17} strokeWidth={2} />,    label: "MediBot", to: "/", isCenter: true, search: { bot: true } },
+  { icon: <Home size={17} strokeWidth={2} />,   label: "Home",    to: "/"         },
+  { icon: <Bookmark size={17} strokeWidth={2}/>,label: "Profile", to: "/dashboard"},
 ];
 
 export default function BottomNav() {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
+  const isBotOpen = (search as any)?.bot === true;
 
   return (
-    <nav
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 backdrop-blur-md"
-      aria-label="Main navigation"
-    >
-      <ul className="mx-auto flex max-w-5xl items-stretch justify-between pb-[env(safe-area-inset-bottom)]">
-        {tabs.map(({ to, label, icon: Icon }) => {
-          const active = to === "/" ? pathname === "/" : pathname.startsWith(to);
-          return (
-            <li key={to} className="flex-1">
+    <AnimatePresence>
+      <motion.nav
+        initial={{ y: 100, x: "-50%", opacity: 0 }}
+        animate={{ y: 0, x: "-50%", opacity: 1 }}
+        transition={{ delay: 0.5, type: "spring", stiffness: 260, damping: 20 }}
+        className="floating-nav"
+      >
+        <div className="flex items-center gap-1">
+          {navItems.map(({ to, label, icon, isCenter, search: tabSearch }) => {
+            const active = isCenter ? isBotOpen : (to === "/" ? (pathname === "/" && !isBotOpen) : pathname.startsWith(to));
+            
+            return (
               <Link
-                to={to}
-                aria-current={active ? "page" : undefined}
-                className={`tap-active relative flex flex-col items-center justify-center gap-0.5 py-2 min-h-[52px] transition-colors ${
-                  active ? "text-primary" : "text-mutedfg hover:text-foreground"
-                }`}
+                key={label}
+                to={to as any}
+                search={tabSearch}
+                className="relative text-decoration-none"
               >
-                {/* Active pill indicator — top */}
-                {active && (
-                  <span className="absolute top-0 left-1/2 -translate-x-1/2 h-0.5 w-8 rounded-b-full bg-primary" />
-                )}
-                <Icon className="h-[22px] w-[22px]" strokeWidth={active ? 2.2 : 1.8} />
-                <span className={`hidden min-[360px]:block text-[10px] tracking-tight font-medium`}>
-                  {label}
-                </span>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`
+                    nav-item transition-all duration-300
+                    ${isCenter ? "nav-item-center" : ""}
+                    ${active && !isCenter ? "active" : ""}
+                  `}
+                >
+                  {icon}
+                  {!isCenter && (
+                    <span className="nav-label">
+                      {label}
+                    </span>
+                  )}
+                </motion.div>
               </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+            );
+          })}
+        </div>
+      </motion.nav>
+    </AnimatePresence>
   );
 }

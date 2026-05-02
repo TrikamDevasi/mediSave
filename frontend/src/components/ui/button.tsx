@@ -1,49 +1,67 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
-
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  },
-);
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "success";
+export type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+  loading?: boolean;
+  fullWidth?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
+  ({ className, variant = "primary", size = "md", leftIcon, rightIcon, loading, fullWidth, disabled, children, ...props }, ref) => {
+    
+    const variants = {
+      primary: "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] active:bg-[var(--color-primary-active)] shadow-sm",
+      secondary: "bg-transparent border border-[var(--color-border)] text-[var(--color-text)] hover:bg-[var(--color-surface-2)] active:bg-[var(--color-surface-3)]",
+      ghost: "bg-transparent text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-2)]",
+      danger: "bg-[var(--color-danger)] text-white hover:bg-red-700 active:bg-red-800",
+      success: "bg-[var(--color-success)] text-white hover:bg-green-700 active:bg-green-800",
+    };
+
+    const sizes = {
+      xs: "h-7 px-3 text-[10px] uppercase tracking-widest font-black",
+      sm: "h-8 px-4 text-xs font-bold",
+      md: "h-10 px-6 text-sm font-semibold",
+      lg: "h-12 px-8 text-base font-bold",
+      xl: "h-14 px-10 text-lg font-extrabold",
+    };
+
     return (
-      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+      <motion.button
+        ref={ref}
+        whileHover={!disabled && !loading ? { translateY: -1 } : {}}
+        whileTap={!disabled && !loading ? { scale: 0.98, translateY: 0 } : {}}
+        disabled={disabled || loading}
+        className={cn(
+          "inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed",
+          variants[variant],
+          sizes[size],
+          fullWidth ? "w-full" : "w-auto",
+          className
+        )}
+        {...props}
+      >
+        {loading ? (
+          <div className="btn-spinner" />
+        ) : (
+          <>
+            {leftIcon && <span className="shrink-0">{leftIcon}</span>}
+            <span className={cn(loading && "opacity-70")}>{children}</span>
+            {rightIcon && <span className="shrink-0">{rightIcon}</span>}
+          </>
+        )}
+      </motion.button>
     );
-  },
+  }
 );
+
 Button.displayName = "Button";
 
-export { Button, buttonVariants };
+export { Button };

@@ -8,7 +8,9 @@ export type Pharmacy = {
   janAushadhi?: boolean;
   cheapest?: boolean;
   pin: { top: string; left: string };
+  mapsUrl?: string;
 };
+
 
 export const pharmacies: Pharmacy[] = [
   {

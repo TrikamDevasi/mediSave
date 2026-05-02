@@ -14,7 +14,7 @@ router.get('/nearby', async (req, res) => {
     }
     if (!lat || !lng) return res.status(400).json({ success: false, error: 'lat and lng required' });
 
-    const query = {
+    const geoQuery = {
       location: {
         $nearSphere: {
           $geometry: { type: 'Point', coordinates: [lngNum, latNum] },
@@ -30,13 +30,22 @@ router.get('/nearby', async (req, res) => {
           { genericName: new RegExp(medicine, 'i') }
         ] 
       }).lean();
-      if (med) query['inventory.medicineId'] = med._id;
-      query['inventory.inStock'] = true;
+      if (med) geoQuery['inventory.medicineId'] = med._id;
+      geoQuery['inventory.inStock'] = true;
     }
 
-    const pharmacies = await Pharmacy.find(query).limit(10).lean();
+    let pharmacies;
+    try {
+      pharmacies = await Pharmacy.find(geoQuery).limit(20).lean();
+    } catch (geoErr) {
+      // 2dsphere index may not exist yet — fall back to plain find
+      console.warn('[pharmacy/nearby] geo query failed, falling back to plain find:', geoErr.message);
+      pharmacies = await Pharmacy.find({}).limit(20).lean();
+    }
+
     res.json({ success: true, data: { pharmacies, count: pharmacies.length } });
   } catch (err) {
+    console.error('[pharmacy/nearby] error:', err.message);
     res.status(500).json({ success: false, error: err.message });
   }
 });

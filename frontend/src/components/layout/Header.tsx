@@ -1,67 +1,125 @@
 import { Link } from "@tanstack/react-router";
-import { Bell, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
-import medisaveLogo from "@/assets/medisave-logo.png";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
-  const [isDark, setIsDark] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
-    const stored = localStorage.getItem("medisave-theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const useDark = stored ? stored === "dark" : prefersDark;
-    document.documentElement.classList.toggle("dark", useDark);
-    setIsDark(useDark);
+    const saved = localStorage.getItem('medisave-theme') as 'light' | 'dark' | null;
+    const current = saved || (document.documentElement.getAttribute('data-theme') as 'light' | 'dark') || 'light';
+    setTheme(current);
   }, []);
 
-  const toggleDark = () => {
-    const next = !isDark;
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("medisave-theme", next ? "dark" : "light");
-    setIsDark(next);
+  const toggleTheme = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const current = document.documentElement.getAttribute('data-theme') as 'light' | 'dark' || 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+
+    const x = e.clientX;
+    const y = e.clientY;
+    const maxRadius = Math.hypot(
+      Math.max(x, window.innerWidth  - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    // Fallback for browsers without View Transitions (Safari, Firefox)
+    if (typeof (document as any).startViewTransition !== 'function') {
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('medisave-theme', next); } catch {}
+      setTheme(next);
+      return;
+    }
+
+    document.documentElement.style.setProperty('--theme-x', `${x}px`);
+    document.documentElement.style.setProperty('--theme-y', `${y}px`);
+    document.documentElement.style.setProperty('--theme-r', `${maxRadius}px`);
+
+    const transition = (document as any).startViewTransition(() => {
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('medisave-theme', next); } catch {}
+      setTheme(next);
+    });
+
+    await transition.ready;
   };
 
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
-
-        {/* Logo — large, no box wrapper */}
-        <Link to="/" className="flex shrink-0 items-center" aria-label="MediSave home">
-          <img
-            src={medisaveLogo}
-            alt="MediSave"
-            className="h-10 w-auto object-contain sm:h-11 md:h-12"
-          />
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4, delay: 0.1 }}
+      className="header"
+    >
+      <div className="header-inner container" style={{ height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        
+        {/* Left: Logo */}
+        <Link to="/" className="header-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+          <div style={{ 
+            width: '32px', height: '32px',
+            background: 'var(--color-primary)', borderRadius: '9px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            color: 'white', fontWeight: 900, fontSize: '18px', lineHeight: 1
+          }}>
+            M
+          </div>
+          <span style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: '20px', color: 'var(--color-text)' }}>
+            MediSave
+          </span>
         </Link>
 
-        {/* Actions */}
-        <div className="flex items-center gap-1 sm:gap-2">
-          <button
-            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            onClick={toggleDark}
-            className="tap-active inline-flex h-9 w-9 items-center justify-center rounded-lg text-mutedfg transition-colors hover:bg-muted hover:text-foreground"
-          >
-            {isDark ? <Sun className="h-5 w-5" strokeWidth={2} /> : <Moon className="h-5 w-5" strokeWidth={2} />}
-          </button>
+        {/* Right: Actions */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
 
+          {/* Theme toggle — animated icon swap */}
           <button
-            aria-label="Notifications"
-            className="tap-active relative inline-flex h-9 w-9 items-center justify-center rounded-lg text-mutedfg transition-colors hover:bg-muted hover:text-foreground"
+            className="theme-toggle-btn"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            style={{ position: 'relative', overflow: 'hidden' }}
           >
-            <Bell className="h-5 w-5" strokeWidth={2} />
-            {/* Notification dot */}
-            <span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-warning" aria-hidden="true" />
+            <AnimatePresence mode="wait" initial={false}>
+              {theme === 'dark' ? (
+                <motion.span
+                  key="sun"
+                  initial={{ rotate: -90, scale: 0.5, opacity: 0 }}
+                  animate={{ rotate: 0,   scale: 1,   opacity: 1 }}
+                  exit={{    rotate:  90, scale: 0.5, opacity: 0 }}
+                  transition={{ duration: 0.25, ease: [0.34, 1.56, 0.64, 1] }}
+                  style={{ display: 'flex' }}
+                >
+                  <Sun className="h-5 w-5" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="moon"
+                  initial={{ rotate:  90, scale: 0.5, opacity: 0 }}
+                  animate={{ rotate: 0,   scale: 1,   opacity: 1 }}
+                  exit={{    rotate: -90, scale: 0.5, opacity: 0 }}
+                  transition={{ duration: 0.25, ease: [0.34, 1.56, 0.64, 1] }}
+                  style={{ display: 'flex' }}
+                >
+                  <Moon className="h-5 w-5" />
+                </motion.span>
+              )}
+            </AnimatePresence>
           </button>
-
-          {/* Avatar — solid filled, no colored ring */}
-          <div
-            aria-label="Profile"
-            className="ml-1 grid h-9 w-9 place-items-center rounded-full bg-primary text-[13px] font-bold text-primary-foreground"
-          >
-            T
-          </div>
+          
+          <Link to="/login" style={{ 
+            padding: '8px 20px', 
+            background: 'var(--color-primary)',
+            color: 'white',
+            borderRadius: 'var(--radius-sm)',
+            fontWeight: 700,
+            fontSize: '14px',
+            textDecoration: 'none',
+            letterSpacing: '0.02em',
+            textTransform: 'uppercase'
+          }}>
+            Sign in
+          </Link>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

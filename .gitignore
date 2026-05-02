@@ -1,0 +1,64 @@
+# ───────────────────────────────────────────────
+# Root-level .gitignore — MediSave Monorepo
+# ───────────────────────────────────────────────
+
+# Dependencies (all workspaces)
+node_modules/
+**/node_modules/
+
+# Lock files — committed per-workspace, NOT at root
+package-lock.json
+yarn.lock
+bun.lockb
+pnpm-lock.yaml
+
+# Build artefacts
+dist/
+build/
+.output/
+.vinxi/
+.nitro/
+.tanstack/
+
+# Environment — NEVER commit real secrets
+.env
+.env.local
+.env.*.local
+**/.env
+!**/.env.example
+
+# Cloudflare / Wrangler
+.wrangler/
+.dev.vars
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Misc heavy files committed by mistake
+structure.txt
+eng.traineddata
+test-output.txt
+
+# Chroma vector store (generated locally)
+ml-service/data/vectorstore/
+
+# Cloudflare cache
+.cache/
