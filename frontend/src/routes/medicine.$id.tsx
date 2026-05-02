@@ -288,5 +288,6 @@ function MedicineDetailPage() {
         </div>
 
       </div>
+    </div>
   );
 }
