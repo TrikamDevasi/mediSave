@@ -279,20 +279,21 @@ User → Vercel (Frontend SPA)
 
 | Setting | Value |
 |---|---|
-| **Framework Preset** | Vite |
+| **Framework Preset** | Vite (or Other) |
 | **Root Directory** | `frontend` |
 | **Build Command** | `npm run build` |
-| **Output Directory** | `dist` |
+| **Output Directory** | (Leave empty — auto-detected) |
 | **Install Command** | `npm install` |
 
 **Environment Variables to set in Vercel Dashboard:**
 | Variable | Value |
 |---|---|
-| `VITE_API_URL` | `https://medisave-backend.onrender.com/api` |
+| `VITE_API_URL` | `https://medisave-anb2.onrender.com/api` |
 | `VITE_ML_URL` | `https://medisave-ml.onrender.com/ml` |
 | `VITE_GOOGLE_MAPS_KEY` | your Google Maps key |
 
-> The `frontend/vercel.json` is already configured with SPA rewrites and cache headers — no extra config needed.
+> 🚀 **Note:** TanStack Start automatically handles Vercel deployment using the Build Output API. No `vercel.json` is required.
+
 
 ---
 
@@ -347,7 +348,7 @@ User → Vercel (Frontend SPA)
 | `LLM_PROVIDER` | `groq` |
 | `GROQ_API_KEY` | your key |
 | `GEMINI_API_KEY` | your key |
-| `BACKEND_URL` | `https://medisave-backend.onrender.com` |
+| `BACKEND_URL` | `https://medisave-anb2.onrender.com` |
 | `FRONTEND_URL` | `https://your-app.vercel.app` |
 
 > ⚠️ **Free tier note:** Render free services spin down after 15 min of inactivity. First request after sleep takes ~30s. Upgrade to **Starter ($7/mo)** for always-on.
