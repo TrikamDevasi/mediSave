@@ -8,6 +8,7 @@ router.post('/', async (req, res) => {
     if (!message) return res.status(400).json({ success: false, error: 'message is required' });
 
     const result = await chatWithRAG(message, sessionId);
+    console.log(`💬 Chat response generated for session: ${sessionId || 'none'}`);
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
