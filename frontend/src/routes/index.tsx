@@ -104,16 +104,16 @@ function HomePage() {
 
               <CityFlip />
 
-              <div style={{ perspective: "1000px" }} className="flex flex-col text-left mt-4">
-                <h1 className="text-4xl sm:text-6xl font-light tracking-tight text-foreground/70 leading-tight">
+              <div style={{ perspective: "1000px" }} className="flex flex-col text-left mt-2 sm:mt-4 w-full">
+                <h1 className="text-3xl sm:text-6xl font-light tracking-tight text-foreground/70 leading-tight">
                   <AnimatedHeadline text="Save up to" delay={0.2} />
                 </h1>
-                <h1 className="text-7xl sm:text-9xl font-black tracking-tighter leading-none mt-2">
-                  <span className="shimmer-text">
+                <h1 className="text-5xl sm:text-9xl font-black tracking-tighter leading-none mt-1 sm:mt-2">
+                  <span className="shimmer-text block sm:inline">
                      <AnimatedHeadline text="₹12,000 yearly" delay={0.4} />
                   </span>
                 </h1>
-                <h1 className="text-4xl sm:text-6xl font-light tracking-tight text-foreground/70 mt-2">
+                <h1 className="text-3xl sm:text-6xl font-light tracking-tight text-foreground/70 mt-1 sm:mt-2">
                   <AnimatedHeadline text="on medicines" delay={0.6} />
                 </h1>
               </div>
@@ -122,7 +122,7 @@ function HomePage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8 }}
-                className="mt-8 text-lg sm:text-xl text-muted-foreground max-w-[40ch] leading-relaxed text-left text-wrap-pretty"
+                className="mt-4 sm:mt-8 text-base sm:text-xl text-muted-foreground max-w-[40ch] leading-relaxed text-left text-wrap-pretty"
               >
                 Compare prices across 50,000+ pharmacies in India. Find generic alternatives instantly.
               </motion.p>
@@ -131,17 +131,17 @@ function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 }}
-                className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+                className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto"
               >
                 <MagneticButton className="w-full sm:w-auto">
-                  <Link to="/search" onClick={(e) => handleNav(e, "/search")} className="flex h-14 items-center justify-center gap-3 rounded-full bg-primary px-8 font-black text-white shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-95 text-sm uppercase tracking-widest">
-                    <MapPin className="h-5 w-5" />
+                  <Link to="/search" onClick={(e) => handleNav(e, "/search")} className="flex h-12 sm:h-14 items-center justify-center gap-3 rounded-full bg-primary px-6 sm:px-8 font-black text-white shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-95 text-xs sm:text-sm uppercase tracking-widest">
+                    <MapPin className="h-4 w-4 sm:h-5 sm:w-5" />
                     Find Cheapest Near Me
                   </Link>
                 </MagneticButton>
                 <MagneticButton className="w-full sm:w-auto">
-                  <Link to="/scan" onClick={(e) => handleNav(e, "/scan")} className="flex h-14 items-center justify-center gap-3 rounded-full border border-border bg-surface/50 backdrop-blur-md px-8 font-black text-foreground transition-all hover:scale-[1.02] active:scale-95 text-sm uppercase tracking-widest">
-                    <Camera className="h-5 w-5 text-primary" />
+                  <Link to="/scan" onClick={(e) => handleNav(e, "/scan")} className="flex h-12 sm:h-14 items-center justify-center gap-3 rounded-full border border-border bg-surface/50 backdrop-blur-md px-6 sm:px-8 font-black text-foreground transition-all hover:scale-[1.02] active:scale-95 text-xs sm:text-sm uppercase tracking-widest">
+                    <Camera className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                     Scan Prescription
                   </Link>
                 </MagneticButton>
