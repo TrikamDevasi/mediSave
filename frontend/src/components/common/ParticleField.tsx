@@ -24,6 +24,7 @@ export function ParticleField() {
     resize()
     window.addEventListener("resize", resize)
 
+    const colors = ["#0d9ea6", "#fbbf24", "#4ade80", "#a78bfa"]
     const isMobile = window.innerWidth < 768
     const count = isMobile ? 30 : 60 
 
