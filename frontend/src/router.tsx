@@ -58,7 +58,6 @@ export const getRouter = () => {
   const router = createRouter({
     routeTree,
     context: {},
-    ssr: false, // Disable SSR for SPA mode
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
     defaultErrorComponent: DefaultErrorComponent,
