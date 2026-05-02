@@ -327,7 +327,7 @@ User → Vercel (Frontend SPA)
 | `GEMINI_API_KEY` | your key |
 | `GROQ_API_KEY` | your key |
 | `OPENAI_API_KEY` | your key (optional fallback) |
-| `FRONTEND_URL` | `https://your-app.vercel.app` |
+| `FRONTEND_URL` | `https://medi-save-opal.vercel.app` |
 | `ML_SERVICE_URL` | `https://medisave-ml.onrender.com` |
 
 #### ML Service
@@ -349,7 +349,7 @@ User → Vercel (Frontend SPA)
 | `GROQ_API_KEY` | your key |
 | `GEMINI_API_KEY` | your key |
 | `BACKEND_URL` | `https://medisave-anb2.onrender.com` |
-| `FRONTEND_URL` | `https://your-app.vercel.app` |
+| `FRONTEND_URL` | `https://medi-save-opal.vercel.app` |
 
 > ⚠️ **Free tier note:** Render free services spin down after 15 min of inactivity. First request after sleep takes ~30s. Upgrade to **Starter ($7/mo)** for always-on.
 
