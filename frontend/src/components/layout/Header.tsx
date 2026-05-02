@@ -9,6 +9,11 @@ export default function Header() {
   useEffect(() => {
     const saved = localStorage.getItem('medisave-theme') as 'light' | 'dark' | null;
     const current = saved || (document.documentElement.getAttribute('data-theme') as 'light' | 'dark') || 'light';
+    if (current === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
     setTheme(current);
   }, []);
 
@@ -26,6 +31,11 @@ export default function Header() {
     // Fallback for browsers without View Transitions (Safari, Firefox)
     if (typeof (document as any).startViewTransition !== 'function') {
       document.documentElement.setAttribute('data-theme', next);
+      if (next === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
       try { localStorage.setItem('medisave-theme', next); } catch {}
       setTheme(next);
       return;
@@ -37,6 +47,11 @@ export default function Header() {
 
     const transition = (document as any).startViewTransition(() => {
       document.documentElement.setAttribute('data-theme', next);
+      if (next === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
       try { localStorage.setItem('medisave-theme', next); } catch {}
       setTheme(next);
     });
