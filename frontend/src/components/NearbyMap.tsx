@@ -142,7 +142,7 @@ export default function NearbyMap({ userLocation, pharmacies, isLocating, onLoca
         preferCanvas
       >
         <TileLayer url={tile.url} attribution={tile.attribution} maxZoom={19} />
-        <ZoomControl position="bottomright" />
+        {window.innerWidth >= 768 && <ZoomControl position="bottomright" />}
         <MapSync center={userLocation} />
 
         {/* User location marker */}
@@ -160,8 +160,8 @@ export default function NearbyMap({ userLocation, pharmacies, isLocating, onLoca
             icon={L.divIcon({
               className: '',
               html: getMarkerHTML(p),
-              iconSize: [90, 44],
-              iconAnchor: [45, 44],
+              iconSize: window.innerWidth < 768 ? [100, 50] : [90, 44],
+              iconAnchor: window.innerWidth < 768 ? [50, 50] : [45, 44],
             })}
             eventHandlers={{ click: () => onPharmacyClick(p.id) }}
           >
@@ -186,7 +186,15 @@ export default function NearbyMap({ userLocation, pharmacies, isLocating, onLoca
       </MapContainer>
 
       {/* ── FAB controls — rendered outside MapContainer so z-index works ── */}
-      <div style={{ position: 'absolute', bottom: 90, right: 16, zIndex: 500, display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div style={{ 
+        position: 'absolute', 
+        bottom: window.innerWidth < 768 ? 160 : 90, 
+        right: 16, 
+        zIndex: 500, 
+        display: 'flex', 
+        flexDirection: 'column', 
+        gap: 8 
+      }}>
 
         {/* Layer picker */}
         <div style={{ position: 'relative' }}>

@@ -238,11 +238,18 @@ function NearbyPage() {
           <motion.aside 
             initial={false}
             animate={{ 
-              width: view === 'map' ? '0%' : '100%',
-              opacity: view === 'map' ? 0 : 1
+              opacity: window.innerWidth < 1024 && view === 'map' ? 0 : 1,
+              x: window.innerWidth < 1024 && view === 'map' ? -420 : 0
             }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="nearby-left-panel border-r border-divider z-10 lg:!w-[420px] lg:!opacity-100 lg:!block"
+            className="nearby-left-panel border-r border-divider z-10 w-full lg:w-[420px] lg:opacity-100 lg:block"
+            style={{ 
+              position: window.innerWidth < 1024 ? 'absolute' : 'relative',
+              top: 0,
+              left: 0,
+              height: '100%',
+              zIndex: 20
+            }}
           >
              {/* Search & Filters */}
              <div className="p-6 border-b border-divider space-y-6 sticky top-0 bg-background/95 backdrop-blur-md z-20">
