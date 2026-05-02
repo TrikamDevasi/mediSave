@@ -11,7 +11,7 @@ import {
   Info
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import AppLayout from '@/components/layout/AppLayout';
+
 import { Card } from '@/components/ui/card';
 import { api } from '@/lib/axios';
 
@@ -205,8 +205,7 @@ function NearbyPage() {
 
 
   return (
-    <AppLayout>
-      <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100dvh - 64px)', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100dvh - 64px)', overflow: 'hidden' }}>
 
         {/* Sub-Header */}
         <div className="nearby-subheader">
@@ -405,6 +404,6 @@ function NearbyPage() {
 
         </div>
       </div>
-    </AppLayout>
+    </div>
   );
 }

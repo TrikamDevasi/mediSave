@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import AppLayout from "@/components/layout/AppLayout";
+
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -26,7 +26,7 @@ function AboutPage() {
   ];
 
   return (
-    <AppLayout>
+    <div>
       <section className="bg-gradient-to-br from-primary to-primary-dark px-4 py-10 text-white">
         <h1 className="text-3xl font-bold">About MediSave</h1>
         <p className="mt-2 text-sm opacity-85 leading-relaxed">
@@ -78,6 +78,6 @@ function AboutPage() {
           </div>
         </div>
       </section>
-    </AppLayout>
+    </div>
   );
 }

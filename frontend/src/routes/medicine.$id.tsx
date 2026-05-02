@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import AppLayout from "@/components/layout/AppLayout";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -65,7 +65,7 @@ function MedicineDetailPage() {
   };
 
   return (
-    <AppLayout hideNav>
+    <div>
       <div className="min-h-screen pb-32">
         
         {/* Dynamic Header */}
@@ -288,6 +288,6 @@ function MedicineDetailPage() {
         </div>
 
       </div>
-    </AppLayout>
+    </div>
   );
 }

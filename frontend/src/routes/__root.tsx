@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createContext, useContext, useCallback, useState, useEffect } from "react";
-import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouterState, useNavigate } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouterState, useNavigate, redirect } from "@tanstack/react-router";
 import { Toaster } from "@/components/ui/sonner";
 import { AnimatePresence, motion } from "framer-motion";
 import Header from "@/components/layout/Header";
@@ -80,6 +80,20 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
+  beforeLoad: ({ location }) => {
+    // Skip protection for login and onboarding
+    if (location.pathname === '/onboarding' || location.pathname === '/login') {
+      return;
+    }
+
+    // Global onboarding check
+    const onboarded = typeof window !== 'undefined' && localStorage.getItem('medisave_onboarded') === 'true';
+    if (!onboarded) {
+      throw redirect({
+        to: '/onboarding',
+      });
+    }
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },

@@ -12,7 +12,7 @@ import {
   Sparkles,
   ArrowRight
 } from "lucide-react";
-import AppLayout from "@/components/layout/AppLayout";
+
 import { usePageTransition } from "./__root";
 import MediCard from "@/components/medicine/MediCard";
 import { searchResultsMock } from "@/data/mockMedicines";
@@ -47,8 +47,7 @@ function ScanPage() {
   };
 
   return (
-    <AppLayout>
-      <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-6">
+    <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-6">
         
         {/* Header Overlay */}
         <div className="absolute top-0 left-0 right-0 p-8 flex items-center justify-between z-10">
@@ -181,6 +180,6 @@ function ScanPage() {
         </AnimatePresence>
 
       </div>
-    </AppLayout>
+    </div>
   );
 }

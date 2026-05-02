@@ -15,7 +15,7 @@ import {
   LayoutGrid,
   ArrowUpLeft,
 } from "lucide-react";
-import AppLayout from "@/components/layout/AppLayout";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import MediCard from "@/components/medicine/MediCard";
@@ -143,8 +143,7 @@ function SearchPage() {
   };
 
   return (
-    <AppLayout>
-      <div style={{ minHeight: "100dvh", paddingTop: 64, background: "var(--color-bg)" }}>
+    <div style={{ minHeight: "100dvh", background: "var(--color-bg)" }}>
 
         {/* ── Search bar header ─────────────────────────────────────────── */}
         <div style={{
@@ -453,6 +452,6 @@ function SearchPage() {
 
         </div>
       </div>
-    </AppLayout>
+    </div>
   );
 }

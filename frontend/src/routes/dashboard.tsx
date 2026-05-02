@@ -17,7 +17,7 @@ import {
   Settings,
   User
 } from "lucide-react";
-import AppLayout from "@/components/layout/AppLayout";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -54,8 +54,7 @@ function DashboardPage() {
   };
 
   return (
-    <AppLayout>
-      <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen bg-background">
         
         {/* Sticky Sub-Header — Fix 1.1: Z-Index Scale */}
         <header className="sticky top-0 z-[var(--z-sticky)] w-full bg-background/80 backdrop-blur-xl border-b border-divider px-4 h-16 flex items-center justify-between">
@@ -212,6 +211,6 @@ function DashboardPage() {
         </div>
 
       </div>
-    </AppLayout>
+    </div>
   );
 }

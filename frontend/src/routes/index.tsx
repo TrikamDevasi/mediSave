@@ -13,7 +13,7 @@ import {
   ArrowRight,
   ShieldCheck
 } from "lucide-react";
-import AppLayout from "@/components/layout/AppLayout";
+
 import SearchBar from "@/components/common/SearchBar";
 import Footer from "@/components/layout/Footer";
 import { MagneticButton } from "@/components/common/MagneticButton";
@@ -67,15 +67,6 @@ const trendingTopics = [
 ]
 
 export const Route = createFileRoute("/")({
-  beforeLoad: ({ location }) => {
-    // If not onboarded, redirect to onboarding
-    const onboarded = typeof window !== 'undefined' && localStorage.getItem('medisave_onboarded') === 'true';
-    if (!onboarded) {
-      throw redirect({
-        to: '/onboarding',
-      });
-    }
-  },
   component: HomePage,
 });
 
@@ -91,8 +82,7 @@ function HomePage() {
   }
 
   return (
-    <AppLayout>
-      <div className="flex flex-col">
+    <div className="flex flex-col">
         
         {/* ─── FIX 7: HERO SECTION ─── */}
         <section className="hero-section">
@@ -713,6 +703,6 @@ function HomePage() {
 
         <Footer />
       </div>
-    </AppLayout>
+    </div>
   );
 }

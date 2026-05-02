@@ -5,7 +5,7 @@ import { z } from "zod";
 import { Mail, Code2, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import AppLayout from "@/components/layout/AppLayout";
+
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -56,7 +56,7 @@ function ContactPage() {
     }`;
 
   return (
-    <AppLayout>
+    <div>
       <div className="px-4 pt-5">
         <h1 className="text-2xl font-bold text-primary">Contact Us</h1>
         <p className="text-sm text-mutedfg">We'd love to hear from you.</p>
@@ -130,6 +130,6 @@ function ContactPage() {
           ))}
         </div>
       </div>
-    </AppLayout>
+    </div>
   );
 }
