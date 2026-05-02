@@ -140,7 +140,7 @@ function OnboardingPage() {
                     <button 
                       key={m.name}
                       onClick={() => setSelectedMed(i)}
-                      className={`p-4 rounded-2xl border transition-all ${selectedMed === i ? 'bg-white text-primary border-white shadow-xl scale-105' : 'bg-white/5 border-white/10 text-white hover:bg-white/10'}`}
+                      className={`p-4 rounded-2xl border transition-all ${selectedMed === i ? 'bg-white text-[#016a6f] border-white shadow-xl scale-105' : 'bg-white/5 border-white/10 text-white hover:bg-white/10'}`}
                     >
                       <div className="font-bold">{m.name}</div>
                     </button>
@@ -191,7 +191,7 @@ function OnboardingPage() {
                   <div className="absolute inset-0 bg-white/5 rounded-full animate-ping" />
                   <div className="absolute inset-4 bg-white/10 rounded-full animate-pulse" />
                   <div className="absolute inset-12 bg-white flex items-center justify-center rounded-full shadow-2xl">
-                     <MapPin className="h-10 w-10 text-primary" />
+                     <MapPin className="h-10 w-10 text-[#016a6f]" />
                   </div>
                </div>
                <h2 className="text-4xl font-black tracking-tighter mb-4">Find pharmacies near you</h2>
@@ -229,7 +229,7 @@ function OnboardingPage() {
                     <button 
                       key={c.name}
                       onClick={() => toggleCat(c.name)}
-                      className={`p-4 rounded-2xl border transition-all text-left flex flex-col gap-2 ${selectedCats.includes(c.name) ? 'bg-white text-primary border-white shadow-xl' : 'bg-white/5 border-white/10 text-white hover:bg-white/10'}`}
+                      className={`p-4 rounded-2xl border transition-all text-left flex flex-col gap-2 ${selectedCats.includes(c.name) ? 'bg-white text-[#016a6f] border-white shadow-xl' : 'bg-white/5 border-white/10 text-white hover:bg-white/10'}`}
                     >
                       <span className="text-2xl">{c.icon}</span>
                       <span className="font-bold text-sm leading-tight">{c.name}</span>
