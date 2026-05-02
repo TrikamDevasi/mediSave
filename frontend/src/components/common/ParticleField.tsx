@@ -8,6 +8,8 @@ interface Particle {
   size: number; opacity: number; color: string
 }
 
+const colors = ["#0d9ea6", "#fbbf24", "#4ade80", "#a78bfa"]
+
 export function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -24,7 +26,6 @@ export function ParticleField() {
     resize()
     window.addEventListener("resize", resize)
 
-    const colors = ["#0d9ea6", "#fbbf24", "#4ade80", "#a78bfa"]
     const isMobile = window.innerWidth < 768
     const count = isMobile ? 30 : 60 
 
